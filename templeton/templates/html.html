@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+  {{ md }}
+  
+  {% for s in sm %}
+    {{ s }}
+  {% endfor %}
+{% endblock %}
