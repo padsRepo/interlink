@@ -1,0 +1,22 @@
+{% extends 'templeton.html' %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block title %}{{ title }} | Website{% endblock %}
+
+{% block content %}
+
+<article class="store">
+  {% for c in catalog %}
+  <fieldset class="col-3 col-s-12 col-m-12">
+    <legend>{{ c[0] }}</legend>
+    <img src="{{ url_for('static', filename='img/logos/{}'.format(c[10])) }}">
+    <nav>
+      <a href="#" title="www.facebook.com/armyglass"><img src="{{ url_for('static', filename='img/icons/ai-fb-t.png') }}"></a>
+      <a href="#" title="@armyglass"><img src="{{ url_for('static', filename='img/icons/ai-ig-t.png') }}"></a>
+      <a href="mailto:armyglass@hotmail.com?subject=Army%20Glass%20Website" title="Email me!"><img src="{{ url_for('static', filename='img/icons/ai-email-w-t.png') }}"></a>
+    </nav>      
+    <p>${{ c[1] }}<br><a href="https://{{ c[15] }}">Buy Now!</a></p>
+  </fieldset>
+  {% endfor %}
+</article>
+{% endblock %}

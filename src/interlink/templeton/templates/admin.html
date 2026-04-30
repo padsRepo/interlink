@@ -1,0 +1,26 @@
+{% extends 'templeton.html' %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block title %}{{ title }} Admin{% endblock %}
+
+{% block myballslookjustlikesweatyfingers %}
+<article class="admin">
+  <div class="title">
+    <h1>Welcome, {{ session['yourballslooklikemine'] }}. This is a secure connection.</h1>
+    <h2>Admin for {{ db }}</h2>
+  </div>
+  <div class="adminNav col-5">
+    <h2>Reports:</h2>
+        {% for p in nav %}
+          <a href="{{ url_for('templeton.generateReport', db='{}'.format(db),  page='{}'.format(p[0])) }}">{{ p[0] }}</a><br>
+        {% endfor %}
+  </div>
+  <div class="adminNav col-5">
+    <h2>Forms:</h2>
+        {% for p in nav %}
+          <a href="{{ url_for('templeton.generateForm', db='{}'.format(db),  page='{}'.format(p[0])) }}">{{ p[0] }}</a><br>
+        {% endfor %}
+  </div>
+  <p>{{ error }}</p>
+</article>
+{% endblock %}

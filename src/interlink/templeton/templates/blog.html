@@ -1,0 +1,22 @@
+{% extends 'templeton.html' %}
+{% block description %}Raw Thoughts{% endblock %}
+{% block keywords %}{% endblock %}
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+  <article class="col-12 col-s-12 col-m-12">
+    <h1>My personal shit show</h1>
+    <table class="blog">
+      <tr>
+        {% for c in content %}
+          <th>{{ c[3] }}</th>
+        {% endfor %}
+      </tr>
+      {% for row in content %}
+          {% for c in row %}
+          <tr>{{ c }}</tr><br>
+          {% endfor %}
+      {% endfor %}
+    </table>
+  </article>
+{% endblock %}

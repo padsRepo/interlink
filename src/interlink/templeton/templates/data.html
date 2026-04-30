@@ -1,0 +1,51 @@
+{% extends 'templeton.html' %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<article class="index">
+  <section class="col-12 col-s-12 col-m-12">
+    <fieldset>
+      <legend>Downloads:</legend>
+      <div class="mobile">
+        {% for m in manifest %}
+          <div>{{ m[1] }}.) {{ m[6] }}<br>[ Updated: {{ m[0] }} ] [ Created: {{ m[3] }} ]</div>
+          Download: <a href="{{ url_for('/.repository', filename='{}'.format(m[2])) }}" download>{{ m[2] }}</a>
+          Guide: <a href="{{ url_for('templeton.documentation', page='{}'.format(m[5])) }}">{{ m[4] }}</a><br><br>
+        {% endfor %}
+      </div>
+      <table class="data">
+        <tr>
+          <th>Entry</th>
+          <th>Link</th>
+          <th>Updated</th>
+          <th>Created</th>
+          <th>Docs</th>
+          <th>Description</th>
+        </tr>
+        {% for m in manifest %}
+        <tr>
+          <td>{{ m[1] }}</td>
+          <td><a href="{{ m[3] }}" download>{{ m[2] }}</a></td>
+          <td>{{ m[0] }}</td>
+          <td>{{ m[4] }}</td>
+          <td><a href="{{ url_for('templeton.documentation', page='{}'.format(m[6])) }}">{{ m[5] }}</a></td>
+          <td>{{ m[7] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </fieldset>
+  </section>
+
+  <section class="col-4 col-s-3 col-m-6">
+    <h1>My Domains:</h1>
+    <ul class="nav">
+      {% for d in domains %}
+      <li><a href="https://{{ d }}">{{ d }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+</article>
+{% endblock %}

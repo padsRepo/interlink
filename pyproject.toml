@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "interlink"
+version = "1.2.1"
+description = "Flask Generator for Forms, Reports, URLs and templates."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+  { name = "Joe Corso", email = "joe.corso.email@gmail.com" }
+]
+maintainers = [
+  { name = "Joe Corso", email = "joe.corso.email@gmail.com" }
+]
+
+keywords = ["flask", "form-generator", "reporting", "template", "web", "forms"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Framework :: Flask"
+]
+dependencies = [
+  "flask>=2.3",
+  "mysql>=0.0.3",
+  "mysqlclient>=2.2.7",
+  "mysql-connector>=2.2.9",
+  "click>=8.3.1"
+]
+
+[project.urls]
+Homepage = "https://your.project.homepage"  # Optional
+Repository = "https://github.com/padsRepo/interlink"  # Optional
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"interlink" = ["formulator/*", "safeHaven/*", "toolkit/*", "templeton/*", "templeton/templates/*", "templeton/static/*", "templeton/static/css/*", "templeton/static/js/*","templeton/static/img/*","templeton/static/img/icons/*", "templeton/static/img/logos/*", "templeton/templates/guide/*"]
+
+[project.scripts]
+interlink = "interlink.cli:cli"

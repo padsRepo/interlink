@@ -1,0 +1,23 @@
+{% extends 'templeton.html' %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+{% block title %}{{ title }} Form{% endblock %}
+
+{% block content %}
+<article class="index">
+    <fieldset class="form {{ title }}">
+      <output name="showResults" for="submit">{{ error }}</output>
+      <form method="POST">
+            {{data|safe}}
+            {{enumList|safe}}
+            {% for f in form %}
+              {% if f[0] != "snid" %}{% if f[0] != "category" %}
+                <label for="{{ f[0] }}">{{ f[0] }}</label>
+                <input type="text" name="{{ f[0] }}" >
+              {% endif %}{% endif %}
+            {% endfor %}
+        <input id="submit" type="submit" value="submit">
+      </form>
+    </fieldset>
+</article>
+{% endblock %}
