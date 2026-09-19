@@ -1,0 +1,94 @@
+:root {
+  
+  /* ================= SPACING (unchanged) ================= */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  
+  /* ================= RADIUS (unchanged) ================= */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-theme: 4% 6% 4% 6%;
+  
+  /* ================= FONTS (unchanged) ================= */
+  --font-main: "Space Mono", monospace;
+  --font-secondary: "Daddytime Mono", monospace;
+  --font-heading: "Daddytime Mono", monospace;
+  --font-subheading: "Cinzel", serif;
+  --font-varient: small-caps;
+  
+  /* ================= BACKGROUNDS ================= */
+  --bg-main: #070012;        /* deep violet-black */
+  --bg-secondary: #0B0620;   /* dark cyber purple */
+  --bg-tertiary: #120A2A;    /* neon shadow layer */
+  --bg-terminal: #050008;    /* almost black with magenta bias */
+  --bg-nav: rgba(10, 0, 25, 0.65);
+  
+  /* ================= TEXT ================= */
+  --text-primary: #F5F3FF;   /* soft neon white */
+  --text-secondary: #C7D2FE; /* bluish lavender */
+  --text-muted: #7C7A99;
+  --text-align: center;
+  
+  /* ================= BORDERS ================= */
+  --border-subtle: #24103A;
+  --border-strong: #3B1B5C;
+  
+  /* ================= ACCENTS (CYBERPUNK MAGENTA / ELECTRIC BLUE) ================= */
+  --accent-1: #FF2BD6; /* neon magenta */
+  --accent-2: #7C3AED; /* violet transition */
+  --accent-3: #00D9FF; /* electric cyan-blue */
+  --accent-4: #0066FF; /* deep electric blue */
+  
+  /* ================= STATUS COLORS ================= */
+  --success: #2DFFB3; /* neon mint */
+  --error: #FF3B6B;   /* hot glitch red */
+  --warning: #FFD166; /* cyber amber */
+  
+  /* ================= GRADIENTS ================= */
+  --gradient: linear-gradient(
+    135deg,
+    var(--accent-1),
+                              var(--accent-2),
+                              var(--accent-3),
+                              var(--accent-4)
+  );
+  
+  --gradient-reverse: linear-gradient(
+    135deg,
+    var(--accent-4),
+                                      var(--accent-3),
+                                      var(--accent-2),
+                                      var(--accent-1)
+  );
+  
+  /* ================= GLOW / SHADOW ================= */
+  --text-shadow: 0 0 6px rgba(255, 43, 214, 0.35);
+  
+  --glow-soft: 0 0 12px rgba(0, 217, 255, 0.25),
+  0 0 18px rgba(255, 43, 214, 0.18);
+  
+  --glow-strong: 0 0 18px rgba(255, 43, 214, 0.45),
+  0 0 32px rgba(0, 102, 255, 0.35);
+  
+  --shadow-soft: 0 4px 14px rgba(0, 0, 0, 0.6);
+  --shadow: 0 8px 22px rgba(255, 43, 214, 0.18);
+  --shadow-dark: 0 12px 32px rgba(0, 0, 0, 0.85);
+  
+  /* ================= TRANSITIONS ================= */
+  --transition-fast: 0.25s ease;
+  --transition-slow: 0.6s ease;
+  
+  /* ================= ANIMATION ================= */
+  --animation-1: pulseGlow 1.8s infinite;
+  
+  /* ================= SCROLLBAR ================= */
+  --scrollbar: var(--gradient);
+  --scrollbar-hover: var(--gradient-reverse);
+}

@@ -3,19 +3,25 @@
 {% block keywords %}{% endblock %}
 {% block title %}{{ title }} Form{% endblock %}
 
-{% block content %}
+{% block myballslookjustlikesweatyfingers %}
 <article class="index">
     <fieldset class="form {{ title }}">
       <output name="showResults" for="submit">{{ error }}</output>
       <form method="POST">
-            {{data|safe}}
-            {{enumList|safe}}
-            {% for f in form %}
-              {% if f[0] != "snid" %}{% if f[0] != "category" %}
-                <label for="{{ f[0] }}">{{ f[0] }}</label>
-                <input type="text" name="{{ f[0] }}" >
-              {% endif %}{% endif %}
+        {% for d in colName %}
+          {% if d['COLUMN_KEY'] == "MUL" %}
+            <label for="{{ d['COLUMN_NAME'] }}">{{ d['COLUMN_NAME'] }}</label>
+            <select name="{{ d['COLUMN_NAME'] }}">
+            {% for l in lookupTable %}
+              <option value="{{ l[0] }}">{{ l[0] }} - {{ l[2] }}</option>
             {% endfor %}
+            </select>
+          {% endif %}
+          {% if d['COLUMN_KEY'] != 'MUL' %}
+            <label for="{{ d['COLUMN_NAME'] }}">{{ d['COLUMN_NAME'] }}</label>
+            <input type="text" name="{{ d['COLUMN_NAME'] }}" >
+          {% endif %}
+        {% endfor %}
         <input id="submit" type="submit" value="submit">
       </form>
     </fieldset>

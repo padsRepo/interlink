@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wormhole OS v2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<style>
+:root{
+  --bg:#070012;
+  --panel:rgba(10,0,25,0.65);
+  --border:rgba(255,43,214,0.25);
+  --magenta:#ff2bd6;
+  --blue:#00d9ff;
+  --text:#f5f3ff;
+  --muted:#7c7a99;
+  --glow:0 0 20px rgba(255,43,214,0.4);
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:monospace;
+  overflow:hidden;
+}
+
+/* ================= CANVAS BG ================= */
+#bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
+/* ================= BOOT ================= */
+.screen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+#boot{
+  background:black;
+  z-index:1000;
+}
+
+#login{
+  display:none;
+}
+
+#desktop{
+  display:none;
+}
+
+/* ================= WINDOWS ================= */
+.window{
+  position:absolute;
+  width:320px;
+  height:220px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  box-shadow:var(--glow);
+  backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+
+.titlebar{
+  background:rgba(255,43,214,0.1);
+  padding:5px;
+  cursor:move;
+  display:flex;
+  justify-content:space-between;
+}
+
+.content{
+  padding:10px;
+  height:calc(100% - 30px);
+  overflow:auto;
+}
+
+/* ================= TASKBAR ================= */
+#taskbar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:40px;
+  background:rgba(0,0,0,0.6);
+  border-top:1px solid var(--border);
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:0 10px;
+}
+
+/* ================= TERMINAL ================= */
+.terminal{
+  background:black;
+  color:var(--blue);
+  font-size:12px;
+}
+
+/* ================= INPUT ================= */
+input,button{
+  background:black;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:6px;
+}
+
+/* ================= BOOT TEXT ================= */
+.boot-text{
+  color:var(--blue);
+  white-space:pre;
+  animation:flicker 1.5s infinite;
+}
+
+@keyframes flicker{
+  0%,100%{opacity:1}
+  50%{opacity:.3}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= BIOS / BOOT ================= -->
+<div id="boot" class="screen">
+<div class="boot-text">
+WORMHOLE BIOS v2.1
+CHECKING MEMORY........OK
+LOADING KERNEL.........OK
+INIT NEURAL LINK.......OK
+BOOT COMPLETE
+</div>
+</div>
+
+<!-- ================= LOGIN ================= -->
+<div id="login" class="screen">
+<h2>ACCESS TERMINAL</h2>
+<input id="pass" placeholder="password"/>
+<button onclick="login()">ENTER</button>
+</div>
+
+<!-- ================= DESKTOP ================= -->
+<div id="desktop">
+
+<div id="taskbar">
+<button onclick="openApp('terminal')">Terminal</button>
+<button onclick="openApp('files')">Files</button>
+<button onclick="openApp('logs')">Logs</button>
+</div>
+
+<!-- TERMINAL -->
+<div class="window" id="terminal" style="top:60px;left:60px;display:none;">
+<div class="titlebar" onmousedown="dragStart(event,this.parentNode)">
+Terminal <span onclick="closeApp('terminal')">X</span>
+</div>
+<div class="content terminal" id="termOut">
+> system online
+</div>
+<input id="cmd" onkeydown="if(event.key==='Enter')runCmd()"/>
+</div>
+
+<!-- FILE SYSTEM -->
+<div class="window" id="files" style="top:100px;left:420px;display:none;">
+<div class="titlebar" onmousedown="dragStart(event,this.parentNode)">
+File System <span onclick="closeApp('files')">X</span>
+</div>
+<div class="content" id="fs">
+/home<br>/sys<br>/opt<br>
+</div>
+</div>
+
+<!-- LOGS -->
+<div class="window" id="logs" style="top:200px;left:200px;display:none;">
+<div class="titlebar" onmousedown="dragStart(event,this.parentNode)">
+Logs <span onclick="closeApp('logs')">X</span>
+</div>
+<div class="content" id="logBox">
+[OK] boot complete<br>
+</div>
+</div>
+
+</div>
+
+<!-- ================= THREE JS BG ================= -->
+<canvas id="bg"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+
+/* ================= PERSISTENCE ================= */
+let state = JSON.parse(localStorage.getItem("wormhole")) || {
+  loggedIn:false,
+  files:["home","sys","opt"],
+  logs:["boot initialized"]
+};
+
+function save(){
+  localStorage.setItem("wormhole",JSON.stringify(state));
+}
+
+/* ================= BOOT FLOW ================= */
+setTimeout(()=>{
+  document.getElementById("boot").style.display="none";
+  if(state.loggedIn){
+    document.getElementById("desktop").style.display="block";
+  }else{
+    document.getElementById("login").style.display="flex";
+  }
+},2500);
+
+function login(){
+  state.loggedIn=true;
+  save();
+  document.getElementById("login").style.display="none";
+  document.getElementById("desktop").style.display="block";
+}
+
+/* ================= WINDOW SYSTEM ================= */
+function openApp(id){
+  document.getElementById(id).style.display="block";
+}
+
+function closeApp(id){
+  document.getElementById(id).style.display="none";
+}
+
+/* ================= DRAG SYSTEM ================= */
+let dragObj=null,offsetX=0,offsetY=0;
+
+function dragStart(e,el){
+  dragObj=el;
+  offsetX=e.clientX-el.offsetLeft;
+  offsetY=e.clientY-el.offsetTop;
+}
+
+document.addEventListener("mousemove",e=>{
+  if(dragObj){
+    dragObj.style.left=(e.clientX-offsetX)+"px";
+    dragObj.style.top=(e.clientY-offsetY)+"px";
+  }
+});
+
+document.addEventListener("mouseup",()=>dragObj=null);
+
+/* ================= TERMINAL COMMANDS ================= */
+function runCmd(){
+  let input=document.getElementById("cmd");
+  let out=document.getElementById("termOut");
+  let cmd=input.value;
+  input.value="";
+
+  if(cmd==="help"){
+    out.innerHTML+="<br>commands: ls, open logs, sysinfo";
+  }
+  else if(cmd==="ls"){
+    out.innerHTML+="<br>"+state.files.join(" ");
+  }
+  else if(cmd==="sysinfo"){
+    out.innerHTML+="<br>WORMHOLE OS ACTIVE";
+  }
+  else if(cmd==="open logs"){
+    openApp("logs");
+  }
+
+  state.logs.push(cmd);
+  save();
+}
+
+/* ================= THREE JS BACKGROUND ================= */
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.getElementById("bg"),
+  alpha: true,
+  antialias: true
+});
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.z = 60;
+
+/* ================= ORGANIC NODE SYSTEM ================= */
+const count = 1200;
+const geometry = new THREE.BufferGeometry();
+const positions = new Float32Array(count * 3);
+const velocities = new Float32Array(count * 3);
+
+/* initialize organic “cells” */
+for (let i = 0; i < count; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 120;
+  positions[i * 3 + 1] = (Math.random() - 0.5) * 120;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 120;
+
+  velocities[i * 3] = (Math.random() - 0.5) * 0.02;
+  velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.02;
+  velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.02;
+}
+
+geometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positions, 3)
+);
+
+const material = new THREE.PointsMaterial({
+  color: 0x39ff99,   // bio green
+  size: 0.7,
+  transparent: true,
+  opacity: 0.85
+});
+
+const points = new THREE.Points(geometry, material);
+scene.add(points);
+
+/* ================= ORGANIC FIELD FUNCTION ================= */
+function organicForce(x, y, t) {
+  return Math.sin(x * 0.02 + t) * Math.cos(y * 0.02 - t);
+}
+
+/* ================= ANIMATION LOOP ================= */
+function animate() {
+  requestAnimationFrame(animate);
+
+  const pos = geometry.attributes.position.array;
+  const time = Date.now() * 0.0005;
+
+  for (let i = 0; i < count; i++) {
+
+    let ix = i * 3;
+    let x = pos[ix];
+    let y = pos[ix + 1];
+    let z = pos[ix + 2];
+
+    /* ================= ORGANIC MOTION ================= */
+    pos[ix]     += velocities[ix]     + organicForce(y, z, time) * 0.02;
+    pos[ix + 1] += velocities[ix + 1] + organicForce(x, z, time) * 0.02;
+    pos[ix + 2] += velocities[ix + 2] + organicForce(x, y, time) * 0.02;
+
+    /* ================= SOFT CONTAINMENT FIELD ================= */
+    const limit = 70;
+    if (Math.abs(pos[ix]) > limit) velocities[ix] *= -1;
+    if (Math.abs(pos[ix + 1]) > limit) velocities[ix + 1] *= -1;
+    if (Math.abs(pos[ix + 2]) > limit) velocities[ix + 2] *= -1;
+  }
+
+  geometry.attributes.position.needsUpdate = true;
+
+  /* slow breathing motion */
+  points.rotation.y += 0.001;
+  points.rotation.x += 0.0005;
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+/* ================= RESIZE ================= */
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+</script>
+
+
+</body>
+</html>

@@ -1,10 +1,18 @@
 '''
 This is the Toolkit Module. It contains classes and functions that are reuseable across the entire library.
+
+Classes:  
+  DB: Database Connection  
+
+Functions:  
+  site_map: Object method used to query database  
+  get_script_path: path  
 '''
 
 import os
 import sys
 from flask import url_for
+from .db import DB
 
 def get_script_path():
   '''Get the directory path of the project'''

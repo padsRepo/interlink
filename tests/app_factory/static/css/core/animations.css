@@ -1,0 +1,41 @@
+/* =========================
+ *  ANIMATIONS
+ *  ========================= */
+
+@keyframes pulse {
+  from  { box-shadow: 0 0 5px 0 var(--accent-1); }
+  25%   { box-shadow: 0 0 10px 2px var(--accent-1); }
+  50%   { box-shadow: 0 0 5px 0 var(--text-muted); }
+  75%   { box-shadow: 0 0 10px 2px var(--accent-1); }
+  to    { box-shadow: 0 0 5px 0 var(--text-muted); }
+}
+
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 0 4px var(--accent-1));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px var(--accent-3));
+  }
+  100% {
+    filter: drop-shadow(0 0 4px var(--accent-1));
+  }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes floatGlow {
+  0% {
+    transform: translateY(0px);
+    filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.2));
+  }
+  50% {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 6px 14px rgba(251, 113, 133, 0.3));
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

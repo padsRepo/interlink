@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Neon gradient -->
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
+      <stop offset="33%" style="stop-color:#8A2BE2;stop-opacity:1" />
+      <stop offset="66%" style="stop-color:#FF1493;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow filters -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur2"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur3"/>
+      <feMerge>
+        <feMergeNode in="blur3"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" fill="#000000"/>
+  
+  <!-- Database cylinders with glow and animation -->
+  <g transform="translate(100, 100)" filter="url(#neonGlow)">
+    <animateTransform attributeName="transform" type="translate" values="100,100; 100,98; 100,100" dur="2s" repeatCount="indefinite"/>
+    
+    <!-- Top ellipse -->
+    <ellipse cx="0" cy="-50" rx="45" ry="15" stroke="url(#neonGradient)" stroke-width="3" fill="none"/>
+    
+    <!-- Left side line -->
+    <line x1="-45" y1="-50" x2="-45" y2="50" stroke="url(#neonGradient)" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Right side line -->
+    <line x1="45" y1="-50" x2="45" y2="50" stroke="url(#neonGradient)" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Middle ellipse -->
+    <ellipse cx="0" cy="-10" rx="45" ry="15" stroke="url(#neonGradient)" stroke-width="3" fill="none"/>
+    
+    <!-- Second middle ellipse -->
+    <ellipse cx="0" cy="20" rx="45" ry="15" stroke="url(#neonGradient)" stroke-width="3" fill="none"/>
+    
+    <!-- Bottom ellipse -->
+    <ellipse cx="0" cy="50" rx="45" ry="15" stroke="url(#neonGradient)" stroke-width="3" fill="none"/>
+    
+    <!-- Data indicator dots -->
+    <circle cx="-20" cy="-50" r="2" fill="url(#neonGradient)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="-50" r="2" fill="url(#neonGradient)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="20" cy="-50" r="2" fill="url(#neonGradient)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Sparkles -->
+  <g>
+    <circle cx="40" cy="50" r="2" fill="#FFFFFF" opacity="0">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="scale" values="0;1;0" dur="1.5s" repeatCount="indefinite" additive="sum"/>
+    </circle>
+    <circle cx="160" cy="140" r="2" fill="#FFFFFF" opacity="0">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="scale" values="0;1;0" dur="1.5s" begin="0.5s" repeatCount="indefinite" additive="sum"/>
+    </circle>
+    <circle cx="150" cy="60" r="2" fill="#FFFFFF" opacity="0">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" begin="1s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="scale" values="0;1;0" dur="1.5s" begin="1s" repeatCount="indefinite" additive="sum"/>
+    </circle>
+  </g>
+</svg>

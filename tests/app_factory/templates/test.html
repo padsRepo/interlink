@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wormhole shit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<style>
+
+/* ================= BASE SYSTEM ================= */
+:root {
+  --bg: #070012;
+  --panel: rgba(10,0,25,0.6);
+  --border: rgba(255,43,214,0.25);
+
+  --magenta: #ff2bd6;
+  --blue: #00d9ff;
+  --violet: #7c3aed;
+
+  --text: #f5f3ff;
+  --muted: #7c7a99;
+
+  --glow: 0 0 20px rgba(255,43,214,0.4);
+}
+
+body {
+  margin: 0;
+  font-family: monospace;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* ================= BOOT SCREEN ================= */
+#boot {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.boot-text {
+  color: var(--blue);
+  font-size: 14px;
+  white-space: pre;
+  animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+  0%,100% {opacity:1}
+  50% {opacity:0.3}
+}
+
+/* ================= LOGIN ================= */
+#login {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #12002a, black);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+input {
+  padding: 10px;
+  margin-top: 10px;
+  background: black;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* ================= DESKTOP ================= */
+#desktop {
+  display: none;
+  position: fixed;
+  inset: 0;
+}
+
+/* ================= TASKBAR ================= */
+#taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(10,0,25,0.8);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 10px;
+  z-index: 10;
+}
+
+.app-btn {
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+/* ================= WINDOW SYSTEM ================= */
+.window {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--glow);
+  backdrop-filter: blur(10px);
+}
+
+.titlebar {
+  background: rgba(255,43,214,0.1);
+  padding: 5px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  padding: 10px;
+}
+
+/* ================= TERMINAL ================= */
+.terminal {
+  background: black;
+  height: 100%;
+  overflow: auto;
+  font-size: 12px;
+  color: var(--blue);
+}
+
+/* ================= CANVAS BG ================= */
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= BOOT ================= -->
+<div id="boot">
+  <div class="boot-text">
+WORMHOLE OS v1.0
+Initializing neural interface...
+Loading cyber kernel...
+Establishing quantum link...
+System ready.
+  </div>
+</div>
+
+<!-- ================= LOGIN ================= -->
+<div id="login">
+  <h2>LOGIN</h2>
+  <input id="pass" type="password" placeholder="Enter access key"/>
+  <button onclick="login()">Enter</button>
+</div>
+
+<!-- ================= DESKTOP ================= -->
+<div id="desktop">
+
+  <div id="taskbar">
+    <div class="app-btn" onclick="openApp('terminal')">Terminal</div>
+    <div class="app-btn" onclick="openApp('logs')">Logs</div>
+  </div>
+
+  <!-- TERMINAL WINDOW -->
+  <div class="window" id="terminal" style="top:60px;left:60px;">
+    <div class="titlebar">Terminal <span onclick="closeApp('terminal')">X</span></div>
+    <div class="content terminal">
+      > system online<br>
+      > neural link stable<br>
+      > awaiting commands...
+    </div>
+  </div>
+
+  <!-- LOGS WINDOW -->
+  <div class="window" id="logs" style="top:100px;left:400px;">
+    <div class="titlebar">System Logs <span onclick="closeApp('logs')">X</span></div>
+    <div class="content">
+      [OK] boot complete<br>
+      [OK] UI initialized<br>
+      [WARN] minor anomaly detected<br>
+      [OK] all systems stable
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= THREE JS BACKGROUND ================= -->
+<canvas id="bg"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+
+/* ================= BOOT FLOW ================= */
+setTimeout(() => {
+  document.getElementById("boot").style.display = "none";
+  document.getElementById("login").style.display = "flex";
+}, 3000);
+
+function login() {
+  document.getElementById("login").style.display = "none";
+  document.getElementById("desktop").style.display = "block";
+}
+
+/* ================= WINDOW SYSTEM ================= */
+function openApp(id) {
+  document.getElementById(id).style.display = "block";
+}
+
+function closeApp(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+/* ================= THREE JS BACKGROUND ================= */
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({canvas: document.getElementById("bg"), alpha:true});
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.z = 40;
+
+/* GRID */
+const grid = new THREE.GridHelper(200, 40, 0xff2bd6, 0x00d9ff);
+grid.material.opacity = 0.15;
+grid.material.transparent = true;
+scene.add(grid);
+
+/* PARTICLES */
+const geo = new THREE.BufferGeometry();
+const count = 600;
+const pos = new Float32Array(count * 3);
+
+for(let i=0;i<count*3;i++) pos[i]=(Math.random()-0.5)*200;
+geo.setAttribute("position", new THREE.BufferAttribute(pos,3));
+
+const mat = new THREE.PointsMaterial({color:0x00d9ff,size:0.6});
+const pts = new THREE.Points(geo, mat);
+scene.add(pts);
+
+/* ANIMATE */
+function animate(){
+  requestAnimationFrame(animate);
+
+  grid.rotation.z += 0.0008;
+  pts.rotation.y += 0.0006;
+
+  renderer.render(scene,camera);
+}
+animate();
+
+/* RESIZE */
+window.addEventListener("resize",()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+:root {
+  
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-theme: 2% 2% 4% 4%;
+  
+  --font-main: "Space Mono", monospace;
+  --font-secondary: "Daddytime Mono", monospace;
+  --font-heading: "Daddytime Mono", monospace;
+  --font-subheading: "Cinzel", serif;
+  --font-varient: small-caps;
+  
+  --bg-main: #0f172a;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+  --bg-terminal: #020617;
+  --bg-nav: rgba(15, 23, 42, 0.9);
+  
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-align: left;
+  
+  --border-subtle: #1f2937;
+  --border-strong: #374151;
+  
+  --accent-1: #6366f1;
+  --accent-2: #8b5cf6;
+  --accent-3: #3b82f6;
+  --accent-4: #06b6d4;
+  
+  --success: #22c55e;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  
+  --gradient: linear-gradient(135deg,var(--accent-1),var(--accent-2),var(--accent-3),var(--accent-4));
+  --gradient-reverse: linear-gradient(135deg,var(--accent-4),var(--accent-3),var(--accent-2),var(--accent-1));
+  
+  --text-shadow: none;
+  
+  --glow-soft: 0 0 8px rgba(99,102,241,0.25);
+  --glow-strong: 0 0 18px rgba(99,102,241,0.4);
+  
+  --shadow-soft: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow: 0 6px 20px rgba(0,0,0,0.5);
+  --shadow-dark: 0 10px 30px rgba(0,0,0,0.8);
+  
+  --transition-fast: 0.2s ease;
+  --transition-slow: 0.4s ease;
+  
+  --animation-1: none;
+  
+  --scrollbar: var(--gradient);
+  --scrollbar-hover: var(--gradient-reverse);
+}

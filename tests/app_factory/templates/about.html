@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+  <article class="about">
+  
+    <div class="profile-card">
+      <!-- Avatar -->
+      <div class="profile-avatar">
+        <img src="{{ url_for('static', filename='img/logos/ai-padslogo3.png') }}" />
+      </div>
+      <!-- Name / Role -->
+      <div class="profile-name">Frank Wilson</div>
+      <div class="profile-role">System Architect / PADS</div>
+      <!-- Status -->
+      <div class="profile-status">
+        <div class="status-dot"></div>
+        Online
+      </div>
+      <!-- Bio -->
+      <div class="profile-bio">
+        Building modular systems, automation pipelines, and self-hosted infrastructure environments.
+      </div>
+      <!-- Tags -->
+      <div class="profile-tags">
+        <div class="profile-tag">Linux</div>
+        <div class="profile-tag">Flask</div>
+        <div class="profile-tag">PADS</div>
+        <div class="profile-tag">Automation</div>
+      </div>
+      <!-- Stats -->
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <div class="profile-stat-value">42</div>
+          <div class="profile-stat-label">Projects</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-value">128</div>
+          <div class="profile-stat-label">Commits</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-value">7</div>
+          <div class="profile-stat-label">Systems</div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="profile-actions">
+        <button class="btn btn-primary">Follow</button>
+        <button class="btn">Message</button>
+      </div>
+      <!-- Social Icons -->
+      <div class="profile-social">
+        <div class="social-icon">󰈌</div>
+        <div class="social-icon"></div>
+        <div class="social-icon">󱃝</div>
+        <div class="social-icon">🌐</div>
+      </div>
+      <!-- Meta -->
+      <div class="profile-meta">
+        Last active: 2 minutes ago
+      </div>
+    </div>
+
+    <section class="col-8 col-s-6 col-m-12">
+      <h2>Current Projects:</h2>
+      <nav class="pcNavSub mobileNavSub">
+        <div class="effect">
+          <a href="https://www.wormhole.click/pads" target="_blank" title="Documentation Page for Project PADS">Project PADS</a>
+          <div class="beam"></div>
+        </div>
+        <div class="effect">
+          <a href="https://www.armyglass.org/pnp" title="Pipes 'n Pendys feat. Deadenz">Pipes 'n Pendys</a>
+          <div class="beam"></div>
+        </div>
+    </section>
+
+    <section class="col-4 col-s-6 col-m-12">
+      <h2>Project Details:</h2>
+      <p>
+So far I've been able to tackle the Project PADS. It's pretty loaded, so you have to click the link to see the Documentation. It walks you through setting up Arch Linux, building a home server, and installing the PADS Program. PADS just automates a lot of it for me, and has an accounting system, and a few other cool things I like to use to automate daily business tasks. In the future I'd like to get into 3D Printing more, and a few others. So I decided to start showcasing everything here.
+      </p>
+    </section>
+
+    <section class="col-6 col-s-6 col-m-12">
+      <h2>A Veteran Owned Hand Blown Glass Art Company.</h2>
+      <p>Army Glass may not be a good shot on the range, but we aim to please. So what's there to say about that? After a long hard day of operating your favorite equipment, and making sure I can operate mine.<br> You want to come home, and relax. That's where Army Glass comes in. You'll know that after you step off the range drenched in sweat, and possibly other things, that you can reach for your favorite piece.<br> We'll be sure we can be that favorite piece.</p>
+    </section>
+
+    <aside class="col-6 col-s-6 col-m-12">
+      <div class="polaroid"><div class="polaroidBackground"><img src="{{ url_for('static', filename='img/logos/agLogo.png') }}"></div></div>
+      <div class="polaroid2"><div class="polaroidBackground"><img src="{{ url_for('static', filename='img/logos/agLogo.png') }}"></div></div>
+    </aside>
+
+    <aside class="col-6 col-s-6 col-m-12">
+      <div class="polaroid"><div class="polaroidBackground"><img src="{{ url_for('static', filename='img/logos/agLogo.png') }}"></div></div>
+      <div class="polaroid2"><div class="polaroidBackground"><img src="{{ url_for('static', filename='img/logos/agLogo.png') }}"></div></div>
+    </aside>
+
+    <section class="col-6 col-s-6 col-m-12">
+      <h2>Our Products:</h2>
+      <p>
+All products are handmade in the USA. I source the raw materials from Mountain Glass, Boroworld, and Lampwork Supply. I source the logos from Pedco Hill and Art Decal Corp. If you would like to place a wholesale order, just email me. We can discuss details, I'm always happy to take on a new distributor. No matter how big or small.
+      </p>
+    </section>
+
+    <section class="col-12 col-s-12 col-m-12">
+      <h2>Mission:</h2>
+      <p>We have a philosophy at Army Glass, and that is Happiness. We find happiness in sharing ours with you! We'll be there for you to lean on. We'll help bring you happiness.</p>
+    </section>
+
+    <section class="col-12 col-s-12 col-m-12">
+      <h2>Shipping Info:</h2>
+      <p>The item will be shipped within 2 business days of a completed transaction. The tracking number will be emailed to you. For wholesale orders I ask for a 4-6 week lead time.</p>
+    </section> 
+
+    <section class="col-12 col-s-12 col-m-12">
+      <h2>Return Policy:</h2>
+      <p>I do not accept returns on used items. I accept refunds, or replacements on items that are damaged in shipping. Contact me at armyglass@hotmail.com with your name, and a picture of the damaged item.</p>
+    </section> 
+
+    <section class="col-12 col-s-12 col-m-12">
+      <h2>Terms of Service:</h2>
+      <p>All software is written in-house with no third party cookies, or any cookies of that sort. The only other third party software necessary for the operation of the website is the credit card processing. As a company we are not large enough to enjoy a Merchant Account, and thus, are required to use third party software to process credit card transactions. We currently use SquareUp to process credit cards, and by choosing to purchase, you, the user, agree to Square Terms of Service for any protocols neccessary for them(Square) to process your(the user) credit card info.</p>
+      </p>
+    </section> 
+
+  </article>
+{% endblock %}

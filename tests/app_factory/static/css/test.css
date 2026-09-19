@@ -1,0 +1,225 @@
+/* ================= ROOT (YOUR SYSTEM) ================= */
+:root{
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 25px;
+  
+  --font-main: "Space Mono", monospace;
+  --font-heading: "Daddytime Mono", monospace;
+  
+  --transition-fast: 0.3s ease;
+  
+  --bg-main: #05060a;
+  --bg-secondary: #0b0f1a;
+  --bg-tertiary: #0f1629;
+  
+  --text-primary: #e6e6e6;
+  --text-muted: #7f8a99;
+  
+  --border-subtle: rgba(255,255,255,0.08);
+  
+  --accent-1: #0047AB;
+  --accent-2: #6495ED;
+  --accent-3: #89CFF0;
+  --accent-4: #0be7ff;
+  
+  --gradient: linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3),var(--accent-4));
+  
+  --glow-soft: 0 0 10px rgba(11,231,255,0.3);
+}
+
+/* ================= BASE ================= */
+
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  margin: 0;
+}
+
+/* ================= LAYOUT ================= */
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: var(--space-lg);
+}
+
+/* ================= TYPOGRAPHY ================= */
+
+.h1 {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* ================= BUTTONS ================= */
+
+.btn {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn:hover {
+  box-shadow: var(--glow-soft);
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--gradient);
+  color: black;
+  font-weight: bold;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+/* ================= CARD ================= */
+
+.card {
+  background: linear-gradient(180deg,var(--bg-secondary),var(--bg-tertiary));
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: var(--space-lg);
+}
+
+/* ================= INPUT ================= */
+
+.input {
+  width: 100%;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* ================= BADGE ================= */
+
+.badge {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--gradient);
+  color: black;
+  font-size: 12px;
+}
+
+/* ================= ALERT ================= */
+
+.alert {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+}
+
+.alert-success { background: #22c55e; }
+.alert-error { background: #ef4444; }
+.alert-warning { background: #f97316; }
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-md);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background: var(--bg-secondary);
+  padding: var(--space-md);
+  position: fixed;
+}
+
+.sidebar a {
+  display: block;
+  padding: var(--space-sm);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: var(--bg-tertiary);
+}
+
+/* ================= TABLE ================= */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: var(--space-sm);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: var(--bg-secondary);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
+.modal.show {
+  display: flex;
+}
+
+/* ================= TOAST ================= */
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--bg-secondary);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glow-soft);
+}
+
+/* ================= GRID ================= */
+
+.grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.grid-2 { grid-template-columns: repeat(2,1fr); }
+.grid-3 { grid-template-columns: repeat(3,1fr); }

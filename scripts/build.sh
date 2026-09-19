@@ -1,8 +1,12 @@
 #!/bin/bash
 
+set -e
+
 [[ -z $1 ]] && printf "Syntax: ${0##*/} <projectName>\n" && exit 2
 
 base_dir=$(dirname "$(readlink -f "${0%/*}")")
+echo $base_dir
+exit
 randpass=$(sudo < /dev/urandom tr -dc A-Za-z0-9{\!@#$%^\&*\(\){}[]?} | head -c14; echo)
 database="$(find ${base_dir}/scripts -type d -iname db)"
 saveFile="${base_dir}/tests/.env"

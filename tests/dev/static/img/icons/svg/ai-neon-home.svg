@@ -1,0 +1,202 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main gradient: blue to pink to orange -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="35%" style="stop-color:#7b2ff7;stop-opacity:1" />
+      <stop offset="65%" style="stop-color:#ff0080;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Intense outer glow (4 layers) -->
+    <filter id="neonGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <!-- Outer cyan glow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="20" result="blur1"/>
+      <feFlood flood-color="#00d4ff" flood-opacity="0.8"/>
+      <feComposite in2="blur1" operator="in" result="glow1"/>
+      
+      <!-- Mid purple glow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur2"/>
+      <feFlood flood-color="#7b2ff7" flood-opacity="0.9"/>
+      <feComposite in2="blur2" operator="in" result="glow2"/>
+      
+      <!-- Inner pink glow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur3"/>
+      <feFlood flood-color="#ff0080" flood-opacity="1"/>
+      <feComposite in2="blur3" operator="in" result="glow3"/>
+      
+      <!-- Brightest white core -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur4"/>
+      <feFlood flood-color="#ffffff" flood-opacity="1"/>
+      <feComposite in2="blur4" operator="in" result="glow4"/>
+      
+      <feMerge>
+        <feMergeNode in="glow1"/>
+        <feMergeNode in="glow2"/>
+        <feMergeNode in="glow3"/>
+        <feMergeNode in="glow4"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Sparkle glow -->
+    <filter id="sparkleGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="1"/>
+      <feComposite in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Dark background with gradient -->
+  <!--
+  <rect width="512" height="512" fill="#0a0510"/>
+  <radialGradient id="bgGlow" cx="50%" cy="50%">
+    <stop offset="0%" style="stop-color:#1a0a2e;stop-opacity:0.5" />
+    <stop offset="100%" style="stop-color:#0a0510;stop-opacity:1" />
+  </radialGradient>
+  <rect width="512" height="512" fill="url(#bgGlow)"/>
+  -->
+  
+  <!-- Store/Shop Icon -->
+  <g filter="url(#neonGlow)">
+    <!-- Store awning/roof -->
+    <path d="M 140 160 L 160 120 L 220 120 L 240 140 L 272 140 L 292 120 L 352 120 L 372 160 L 372 180 L 140 180 Z" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <path d="M 145 162 L 163 127 L 218 127 L 237 145 L 275 145 L 294 127 L 349 127 L 367 162 L 367 175 L 145 175 Z" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          opacity="0.6"/>
+    
+    <!-- Store building body -->
+    <path d="M 150 180 L 150 380 L 362 380 L 362 180" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <path d="M 155 180 L 155 375 L 357 375 L 357 180" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          opacity="0.6"/>
+    
+    <!-- Door -->
+    <rect x="220" y="280" width="72" height="100" rx="8" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <rect x="225" y="285" width="62" height="90" rx="6" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          opacity="0.6"/>
+    
+    <!-- Left window -->
+    <rect x="170" y="220" width="50" height="50" rx="6" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <rect x="175" y="225" width="40" height="40" rx="4" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          opacity="0.6"/>
+    
+    <!-- Right window -->
+    <rect x="292" y="220" width="50" height="50" rx="6" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <rect x="297" y="225" width="40" height="40" rx="4" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          opacity="0.6"/>
+  </g>
+  
+  <!-- Four-pointed sparkles (LEFT SIDE - cyan/purple) -->
+  <g filter="url(#sparkleGlow)">
+    <path d="M 100 140 L 102 145 L 107 147 L 102 149 L 100 154 L 98 149 L 93 147 L 98 145 Z" 
+          fill="#00d4ff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 120 90 L 121 93 L 124 94 L 121 95 L 120 98 L 119 95 L 116 94 L 119 93 Z" 
+          fill="#00d4ff">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" begin="0.3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 80 200 L 81 202 L 83 203 L 81 204 L 80 206 L 79 204 L 77 203 L 79 202 Z" 
+          fill="#7b2ff7">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 110 250 L 111 251 L 112 252 L 111 253 L 110 254 L 109 253 L 108 252 L 109 251 Z" 
+          fill="#00d4ff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="1s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Four-pointed sparkles (RIGHT SIDE - orange/pink) -->
+  <g filter="url(#sparkleGlow)">
+    <path d="M 420 180 L 422 185 L 427 187 L 422 189 L 420 194 L 418 189 L 413 187 L 418 185 Z" 
+          fill="#ff6b35">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.3s" begin="0.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 400 240 L 401 243 L 404 244 L 401 245 L 400 248 L 399 245 L 396 244 L 399 243 Z" 
+          fill="#ff0080">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.9s" begin="0.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 435 270 L 436 272 L 438 273 L 436 274 L 435 276 L 434 274 L 432 273 L 434 272 Z" 
+          fill="#ff6b35">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.1s" begin="0.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 415 310 L 416 311 L 417 312 L 416 313 L 415 314 L 414 313 L 413 312 L 414 311 Z" 
+          fill="#ff0080">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.7s" begin="1.2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Small dot sparkles -->
+  <g filter="url(#sparkleGlow)">
+    <circle cx="95" cy="170" r="1.5" fill="#7b2ff7">
+      <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="125" cy="220" r="1" fill="#00d4ff">
+      <animate attributeName="opacity" values="0;1;0" dur="2.8s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="430" cy="225" r="1.5" fill="#ff6b35">
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="405" cy="290" r="1" fill="#ff0080">
+      <animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

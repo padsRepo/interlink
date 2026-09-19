@@ -1,0 +1,139 @@
+:root {
+  
+  /* =========================================================
+   *  1. SPACING SCALE
+   *  = *======================================================== */
+  
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  
+  /* =========================================================
+   *  2. RADIUS SCALE
+   *  = *======================================================== */
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-theme: 12% 6% 14% 8%;
+  
+  /* =========================================================
+   *  3. TYPOGRAPHY
+   *  = *======================================================== */
+  
+  --font-main: "Space Mono", monospace;
+  --font-secondary: "Daddytime Mono", monospace;
+  --font-heading: "Daddytime Mono", monospace;
+  --font-subheading: "Cinzel", serif;
+  --font-varient: small-caps;
+  
+  /* =========================================================
+   *  4. COLORS - BASE SURFACES
+   *  = *======================================================== */
+  
+  --bg-main: #f9fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f3f8;
+  --bg-terminal: #0f172a;
+  --bg-nav: rgba(255, 255, 255, 0.6);
+  
+  
+  /* =========================================================
+   *  5. COLORS - TEXT
+   *  = *======================================================== */
+  
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-align: center;
+  
+  /* =========================================================
+   *  6. COLORS - BORDERS
+   *  = *======================================================== */
+  
+  --border-subtle: #e2e8f0;
+  --border-strong: #cbd5f5;
+  
+  
+  /* =========================================================
+   *  7. COLORS - ACCENTS (WARM + PREMIUM)
+   *  = *======================================================== */
+  
+  --accent-1: #f59e0b;   /* gold */
+  --accent-2: #fb7185;   /* coral */
+  --accent-3: #f97316;   /* orange */
+  --accent-4: #eab308;   /* amber */
+  
+  
+  /* =========================================================
+   *  8. SEMANTIC COLORS
+   *  = *======================================================== */
+  
+  --success: #16a34a;
+  --error: #dc2626;
+  --warning: #f59e0b;
+  
+  
+  /* =========================================================
+   *  9. GRADIENTS (SUNSET GLASS)
+   *  = *======================================================== */
+  
+  --gradient: linear-gradient(
+    135deg,
+    var(--accent-1),
+    var(--accent-2),
+    var(--accent-3),
+    var(--accent-4)
+  );
+  
+  --gradient-reverse: linear-gradient(
+    135deg,
+    var(--accent-4),
+    var(--accent-3),
+    var(--accent-2),
+    var(--accent-1)
+  );
+  
+  
+  /* =========================================================
+   *  10. EFFECTS (SOFT GLASS GLOW)
+   *  = *======================================================== */
+  
+  --text-shadow: none;
+  
+  --glow-soft: 
+  0 2px 6px rgba(251, 113, 133, 0.25),
+  0 4px 12px rgba(245, 158, 11, 0.2);
+  
+  --glow-strong: 
+  0 6px 18px rgba(249, 115, 22, 0.35),
+  0 10px 30px rgba(251, 113, 133, 0.3);
+  
+  --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.08);
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.2);
+  
+  
+  /* =========================================================
+   *  11. MOTION
+   *  = *======================================================== */
+  
+  --transition-fast: 0.25s ease;
+  --transition-slow: 0.6s ease;
+  
+  --animation-1: floatGlow 3s ease-in-out infinite;
+  
+  
+  /* =========================================================
+   *  12. MISC
+   *  = *======================================================== */
+  
+  --scrollbar: var(--gradient);
+  --scrollbar-hover: var(--gradient-reverse);
+  
+}

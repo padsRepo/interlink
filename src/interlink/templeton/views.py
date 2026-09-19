@@ -1,196 +1,75 @@
 import os
 from flask import Blueprint, render_template, request
 import interlink
-from interlink.formulator import Generator, DB
+from interlink.formulator import Generator
 from interlink.safeHaven import backdoor, login, honeypot
-from interlink.toolkit import site_map
+from interlink.toolkit import site_map, DB
 from interlink.templeton import tempulator
+from interlink.templeton.decorator import templetonWrapper
 
-templates = os.path.dirname(__file__) + '/templates/'
-static = os.path.dirname(__file__) + '/static/'
-templetonBP = Blueprint('templeton', __name__, url_prefix='/', template_folder=templates, static_folder='static', static_url_path='/assets/')
+# Interlink data sheet
+@templetonWrapper('data.html')
+def data():
+  '''interlink.templeton.views.data'''
+  from interlink import dataCard
+  return dataCard['routeData']
 
-# print(str(Generator('blog', 'DB_USER', 'DB_PASS')), repr(Generator('repo', 'DB_USER', 'DB_PASS')))
+@templetonWrapper()
+def license():
+  pass
 
-def wrapper(page, **kwargs):
-  '''
-Used to wrap all the web pages in default params.
-  
-TODO:  
-- Make a decorator.
+# Interlink wiki
+def documentation(page = 'index.html'):
+  '''interlink.templeton.views.documentation(page)'''
+  return render_template('guide/' + page)
 
-Args:
-page(str): Passes the var to render_template
-kwargs(dict): Added settings to the webpage.
-  '''
-  ip = request.remote_addr
-  database = Generator('', 'DB_USER', 'DB_PASS').generateURL()
-  return render_template(page, version=interlink.__version__, updated=interlink.__updated__, author=interlink.__author__, siteMap=site_map(), ip=ip, database=database, **kwargs)
+# Blog 
+@templetonWrapper('blog.html')
+def blog(db, table):
+  '''interlink.templeton.views.blog(db, table)'''
+  gen = Generator(db, 'DB_USER', 'DB_PASS')
+  colName, colRow, error, title = gen.generateReport(table)
+  return dict(colName=colName, colRow=colRow, error=error, title=title)
 
-@templetonBP.route('/test/<db>/<page>', methods=['GET', 'POST'])
-@backdoor
-@login
-@honeypot
-def test(db, page):
-  error = "enter data"
-  form = getFormData(db, page)
-  if request.method == 'POST':
-    try:
-      colName = tuple(l[0] for l in form)
-      key = ", ".join(colName)
-      value = tuple(request.values.get(l[0]) for l in form)
-      db_conn = DB('DB_USER', 'DB_PASS', ).connect()
-      cursor = db_conn.cursor(buffered=True)
-      cursor.execute(f'''INSERT INTO {db}.{page} ({key}) VALUES {value};''')
-      db_conn.commit()
-      db_conn.close()
-      error = f'''Success!'''
-    except:
-      error = f'''You must fill in all the boxes.'''
-
-  data = getMetadata(db, page)
-  enumList = getEnumData(page)
-  return wrapper('test.html', data=data, form=form, error=error, enumList=enumList, title=page)
-
-@templetonBP.route('/dashboard/')
-def dashboard():
-  title = f"Index"
-  article = f'''
-  Article Content. This is content coming from views.py. This is some Metadata about interlink I've added for the example: <br>
-  '''
-  varA = f'''New:<br>'''
-  #article = article.join('<br>')
-  return wrapper('data.html', title=title, article=article, varA=varA)
-
-@templetonBP.route('/blog/')
-@honeypot
-@backdoor
-def blog():
-  gen = Generator('blog', 'DB_USER', 'DB_PASS')
-  colName, colRow, error, title = gen.generateReport('blog')
-  return wrapper('blog.html', colName=colName, colRow=colRow, error=error, title=title)
-
-@templetonBP.route('/<db>/<table>')
+# Storefront
+@templetonWrapper('store.html')
 def store(db, table):
+  '''interlink.templeton.views.store(db, table)'''
   gen = Generator(db, 'DB_USER', 'DB_PASS')
   catalog = gen.generateQuery(table)
   title = 'Store'
-  return wrapper('store.html', catalog=catalog, title=title)
+  return dict(catalog=catalog, title=title)
 
-@templetonBP.route('/docs/<page>', defaults={'page': 'index.html'})
-@templetonBP.route('/docs/<page>')
-def documentation(page):
-  return render_template('guide/' + page)
-
-@templetonBP.route('/reports/<db>/<page>')
+# Reports
+@templetonWrapper('reports.html')
 @backdoor
 @login
 @honeypot
-def generateReport(db, page):
+def generateReport(db, table):
+  '''interlink.templeton.views.generateReport(db, table)'''
   gen = Generator(db, 'DB_USER', 'DB_PASS')
-  colName, colRow, error, title = gen.generateReport(page)
-  return wrapper('reports.html', colName=colName, colRow=colRow, error=error, title=title)
+  colName, colRow, error, title = gen.generateReport(table)
+  return dict(colName=colName, colRow=colRow, error=error, title=title)
 
-@templetonBP.route('/forms/<db>/<page>', methods=['GET', 'POST'])
+# Forms
+# TODO: Needs to have 'GET' method
+# This may not work
+@templetonWrapper('forms.html')
 @backdoor
 @login
 @honeypot
-def generateForm(db, page):
+def generateForm(db, table):
+  '''interlink.templeton.views.generateForm(db, table)'''
   gen = Generator(db, 'DB_USER', 'DB_PASS')
-  error, form, data, enumList, title = gen.generateForm(page)
-  return wrapper('forms.html', form=form, error=error, title=title, data=data, enumList=enumList)#, category=category, model=model)
+  error, colName, lookupTable = gen.generateForm(table)
+  return dict(lookupTable=lookupTable, colName=colName, error=error)
 
-@templetonBP.route('/admin/<db>')
+# Admin
+@templetonWrapper('admin.html')
 @backdoor
 @login
 @honeypot
 def admin(db):
+  '''interlink.templeton.views.admin(db)'''
   nav = Generator(db, 'DB_USER', 'DB_PASS').generateNav()
-  return wrapper('admin.html', nav=nav, db=db, title=db)
-
-@templetonBP.route('/loginRequired/', methods=['GET', 'POST'])
-def loginRequired():
-  message = 'Please Log in'
-  if request.method == 'POST':
-    fakeName = request.form['username']
-    fakePass = request.form['password']
-    message = "Your Username or Password is incorrect"
-    print(' * The user is attempting to log in!\n   User:', fakeName, 'Password:', fakePass)
-    print(' * The user is attempting to log in!\n   User:', fakeName, 'Password:', fakePass, file=open(os.environ.get('LOG_DIR') + '/pads.log', 'a'))
-    session.clear()
-  return render_template('login.html', message=message)
-  
-@templetonBP.route('/login/', methods=['GET', 'POST'])
-def secure_login():
-  message = 'This is a Secure Login'
-  if request.method == 'POST':
-    session['username'] = request.form['username']
-    session['passwd'] = request.form['password']
-    try:
-      db_conn = DB(db, user, password).connect()
-      cursor = db_conn.cursor()
-      cursor.execute(f'''SELECT passwd FROM profile WHERE username = "{ session['username'] }";''')
-      p = cursor.fetchone()
-      if pwHash.check_password_hash(p[0], session['passwd']):
-        sql = f'''SELECT username, passwd FROM profile WHERE username = "{ session['username'] }" AND passwd = "{ p[0] }";'''
-        cursor.execute(sql)
-        sql = cursor.fetchone()
-        db_conn.close()
-        if sql is not None:
-          message = 'You are logged in.'
-          return redirect(url_for('/.index'))
-        else:
-          print('User does not exist.')
-          return wrapper('login.html')
-    except:
-      print(' * The user is attempting to log in!\n   User:', session['username'])
-      print(' * The user is attempting to log in!\n   User:', session['username'], file=open(os.environ.get('LOG_DIR') + '/pads.log', 'a'))
-      message = "Your Username or Password is incorrect"
-  return wrapper('login.html', message=message)
-  
-@templetonBP.route('/register/', methods=['GET', 'POST'])
-def secure_registration(db, user, pw):
-  error = 'This is a Secure Registration'
-  print('this')
-  if request.method == 'POST':
-    print('that')
-    name = request.form['name']
-    username = request.form['username']
-    password = request.form['password']
-    email = request.form['email']
-    db_conn = DB(db, user, pw).connect()
-    cursor = db_conn.cursor()
-    cursor.execute(f'''SELECT ROW_COUNT() FROM profile;''')
-    row_count = cursor.fetchall()
-    if row_count is None:
-      error = '** Registration is closed. Contact the Administator. **'
-    else:
-      #try:
-        pass_hash = pwHash.generate_password_hash(password).decode('UTF-8')
-        print(pass_hash)
-        #salt = os.urandom(32)
-        sql = f'''INSERT INTO profile(name, username, passwd, email) VALUES("{ name }", "{ username }", "{ pass_hash }", "{ email }");'''
-        cursor.execute(sql)
-        db_conn.commit()
-        db_conn.close()
-        print("Someone has made a profile!")
-        print("Someone has made a profile!", file=open(os.environ.get('LOG_DIR') + '/pads.log', 'a'))
-        return redirect(url_for('/.login'))
-      #except:
-        print('No.')
-  else:
-    error = 'Something went wrong.'
-  return wrapper('register.html', error=error)
-
-@templetonBP.route('/interlink_license/')
-def copyright():
-  return wrapper('license.html')
-  
-# Generic templeton templates
-@templetonBP.errorhandler(404)
-def url_not_found(e):
-  return wrapper("404.html", title="** This Page Does Not Exist **", description="I can\'t find that URL...", error=f'''{e}'''), 404
-
-@templetonBP.errorhandler(500)
-def internal_error(e):
-  return wrapper("500.html", title="** There is an error with my code **", description="There\'s something wrong with me...Some programmer made a K18 error....", error=f'''{e}'''), 500
+  return dict(nav=nav, db=db, title=db)

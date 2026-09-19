@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wormhole Cyber Interface</title>
+
+<style>
+:root {
+
+  /* ================= SPACING ================= */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+
+  /* ================= RADII ================= */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-theme: 4% 6% 4% 6%;
+
+  /* ================= FONTS ================= */
+  --font-main: "Space Mono", monospace;
+  --font-heading: "Daddytime Mono", monospace;
+
+  /* ================= COLORS ================= */
+  --bg-main: #070012;
+  --bg-secondary: #0B0620;
+  --bg-terminal: #050008;
+
+  --text-primary: #F5F3FF;
+  --text-muted: #7C7A99;
+
+  --accent-1: #FF2BD6;
+  --accent-2: #7C3AED;
+  --accent-3: #00D9FF;
+  --accent-4: #0066FF;
+
+  --gradient: linear-gradient(135deg,var(--accent-1),var(--accent-2),var(--accent-3),var(--accent-4));
+
+  /* ================= EFFECTS ================= */
+  --glow-soft: 0 0 12px rgba(0, 217, 255, 0.25),
+               0 0 18px rgba(255, 43, 214, 0.18);
+
+  --glow-strong: 0 0 18px rgba(255, 43, 214, 0.45),
+                  0 0 32px rgba(0, 102, 255, 0.35);
+
+  --shadow-dark: 0 12px 32px rgba(0,0,0,0.85);
+
+  --transition-fast: 0.25s ease;
+}
+
+/* ================= BASE ================= */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: radial-gradient(circle at top, #12002a, var(--bg-main));
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* SCANLINES */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.35;
+}
+
+/* ================= HEADER ================= */
+header {
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  letter-spacing: 3px;
+  text-shadow: var(--glow-strong);
+}
+
+.subtitle {
+  color: var(--text-muted);
+}
+
+/* GLITCH TEXT */
+.glitch {
+  position: relative;
+  animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 0 var(--accent-1), -2px 0 var(--accent-3); }
+  25% { text-shadow: -2px 1px var(--accent-4), 2px -1px var(--accent-2); }
+  50% { transform: translate(1px,-1px); }
+  75% { transform: translate(-1px,1px); }
+  100% { text-shadow: 2px 0 var(--accent-1), -2px 0 var(--accent-3); }
+}
+
+/* ================= GRID ================= */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+}
+
+/* ================= GLASS PANEL ================= */
+.glass {
+  background: rgba(10,0,25,0.55);
+  border: 1px solid rgba(255,43,214,0.18);
+  backdrop-filter: blur(14px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-dark);
+  padding: var(--space-lg);
+}
+
+/* ================= BUTTON ================= */
+.btn {
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid var(--accent-3);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  box-shadow: var(--glow-strong);
+  transform: translateY(-2px);
+}
+
+/* ================= INPUT ================= */
+input {
+  width: 100%;
+  padding: var(--space-sm);
+  margin-top: var(--space-sm);
+  background: var(--bg-terminal);
+  border: 1px solid #2a1a40;
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent-3);
+  box-shadow: var(--glow-soft);
+}
+
+/* ================= HUD BOX ================= */
+.hud {
+  position: relative;
+}
+
+.hud::before,
+.hud::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent-3);
+}
+
+.hud::before { top: 10px; left: 10px; }
+.hud::after { bottom: 10px; right: 10px; }
+
+/* ================= DIVIDER ================= */
+.divider {
+  height: 1px;
+  background: var(--gradient);
+  margin: var(--space-lg) 0;
+  opacity: 0.6;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--text-muted);
+}
+
+/* ================= FLICKER ================= */
+.flicker {
+  animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.4; }
+  94% { opacity: 1; }
+  97% { opacity: 0.2; }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1 class="glitch">WORMHOLE INTERFACE</h1>
+  <p class="subtitle flicker">Cyberpunk Control Node v1.0</p>
+</header>
+
+<div class="container">
+
+  <div class="glass hud">
+    <h2>Terminal Input</h2>
+    <input placeholder="Enter command..." />
+    <button class="btn">Execute</button>
+  </div>
+
+  <div class="glass hud">
+    <h2>Status Panel</h2>
+    <p>System: ONLINE</p>
+    <p>Neural Link: STABLE</p>
+    <p>Bandwidth: 98%</p>
+    <div class="divider"></div>
+    <p class="flicker">⚡ Signal integrity fluctuating...</p>
+  </div>
+
+  <div class="glass hud">
+    <h2>Neon Controls</h2>
+    <button class="btn">Launch Node</button>
+    <button class="btn">Sync Data</button>
+    <button class="btn">Encrypt Channel</button>
+  </div>
+
+  <div class="glass hud">
+    <h2>Logs</h2>
+    <p>[OK] Connection established</p>
+    <p>[OK] Firewall active</p>
+    <p>[WARN] Minor packet distortion</p>
+    <p>[OK] UI rendering stable</p>
+  </div>
+
+</div>
+
+<footer>
+  Wormhole Cyber Interface • Neon System Layer Active
+</footer>
+
+</body>
+</html>

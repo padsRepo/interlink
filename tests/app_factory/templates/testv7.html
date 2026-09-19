@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Wormhole Linux</title>
+<style>
+
+body {
+  margin: 0;
+  background: #050010;
+  color: #00d9ff;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+/* BOOT */
+#boot, #login, #desktop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#login, #desktop { display: none; }
+
+.boot {
+  white-space: pre;
+  animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 1 }
+  50% { opacity: 0.3 }
+}
+
+/* TERMINAL */
+#terminal {
+  width: 80%;
+  height: 70%;
+  background: black;
+  border: 1px solid #00d9ff;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#out {
+  flex: 1;
+  overflow-y: auto;
+}
+
+input {
+  background: black;
+  border: 1px solid #ff2bd6;
+  color: white;
+  padding: 6px;
+  outline: none;
+}
+
+/* FS VIEW */
+#fsview {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 200px;
+  height: 300px;
+  border: 1px solid #ff2bd6;
+  padding: 5px;
+  overflow: auto;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BOOT -->
+<div id="boot">
+<div class="boot">
+WORMHOLE LINUX v3.0
+loading kernel........OK
+mounting /.............OK
+starting shell.........OK
+</div>
+</div>
+
+<!-- LOGIN -->
+<div id="login">
+<h3>login</h3>
+<input id="pass" placeholder="root"/>
+<button onclick="login()">enter</button>
+</div>
+
+<!-- DESKTOP -->
+<div id="desktop">
+
+<div id="terminal">
+<div id="out">Wormhole Linux ready<br></div>
+<input id="cmd" onkeydown="if(event.key==='Enter')run()"/>
+</div>
+
+<div id="fsview"></div>
+
+</div>
+<canvas id="bg"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+
+/* ================= PERSISTENT DISK ================= */
+let disk = JSON.parse(localStorage.getItem("disk")) || {
+  "/": {
+    type:"dir",
+    children:{
+      home:{type:"dir",children:{}},
+      etc:{type:"dir",children:{}},
+      var:{type:"dir",children:{}}
+    }
+  }
+};
+
+let cwd = "/";
+
+/* ================= BOOT FLOW ================= */
+setTimeout(()=>{
+  document.getElementById("boot").style.display="none";
+  document.getElementById("login").style.display="flex";
+},2000);
+
+function login(){
+  document.getElementById("login").style.display="none";
+  document.getElementById("desktop").style.display="flex";
+  renderFS();
+}
+
+/* ================= PATH RESOLVE ================= */
+function getPath(path){
+  let parts = path.split("/").filter(Boolean);
+  let node = disk["/"];
+  for(let p of parts){
+    node = node.children[p];
+    if(!node) return null;
+  }
+  return node;
+}
+
+function save(){
+  localStorage.setItem("disk",JSON.stringify(disk));
+}
+
+/* ================= FS OPS ================= */
+function ls(){
+  let node = getPath(cwd);
+  return Object.keys(node.children).join(" ");
+}
+
+function mkdir(name){
+  let node = getPath(cwd);
+  node.children[name] = {type:"dir",children:{}};
+  save();
+}
+
+function touch(name){
+  let node = getPath(cwd);
+  node.children[name] = {type:"file",content:""};
+  save();
+}
+
+function cat(name){
+  let node = getPath(cwd);
+  return node.children[name]?.content || "no file";
+}
+
+/* ================= SHELL ================= */
+function run(){
+  let cmd = document.getElementById("cmd");
+  let out = document.getElementById("out");
+
+  let input = cmd.value;
+  cmd.value="";
+
+  let parts = input.split(" ");
+  let c = parts[0];
+
+  if(c==="ls"){
+    out.innerHTML += "<br>"+ls();
+  }
+
+  else if(c==="mkdir"){
+    mkdir(parts[1]);
+    out.innerHTML += "<br>dir created";
+  }
+
+  else if(c==="touch"){
+    touch(parts[1]);
+    out.innerHTML += "<br>file created";
+  }
+
+  else if(c==="cat"){
+    out.innerHTML += "<br>"+cat(parts[1]);
+  }
+
+  else if(c==="pwd"){
+    out.innerHTML += "<br>"+cwd;
+  }
+
+  else if(c==="help"){
+    out.innerHTML += "<br>ls mkdir touch cat pwd";
+  }
+
+  else {
+    out.innerHTML += "<br>command not found";
+  }
+
+  renderFS();
+}
+
+/* ================= FILE SYSTEM VIEW ================= */
+function renderFS(){
+  let box = document.getElementById("fsview");
+  let node = getPath(cwd);
+
+  box.innerHTML = "<b>/</b><br>" + JSON.stringify(disk["/"],null,1)
+    .replaceAll("{","")
+    .replaceAll("}","");
+}
+function animate() {
+  requestAnimationFrame(animate);
+
+  const pos = geometry.attributes.position.array;
+  const time = Date.now() * 0.001;
+
+  for (let i = 0; i < count; i++) {
+
+    let ix = i * 3;
+
+    let x = pos[ix];
+    let y = pos[ix + 1];
+    let z = pos[ix + 2];
+
+    /* ================= BIO FORCE FIELD ================= */
+    const noise =
+      Math.sin(x * 0.01 + time) +
+      Math.cos(y * 0.01 - time) +
+      Math.sin(z * 0.01 + time * 0.5);
+
+    /* metabolism pulse */
+    const metabolism = 0.02 + Math.sin(time * 2) * 0.01;
+
+    pos[ix]     += noise * metabolism;
+    pos[ix + 1] += noise * metabolism;
+    pos[ix + 2] += noise * metabolism;
+
+    /* containment (skin boundary) */
+    const limit = 80;
+    if (Math.abs(pos[ix]) > limit) pos[ix] *= -0.5;
+    if (Math.abs(pos[ix + 1]) > limit) pos[ix + 1] *= -0.5;
+    if (Math.abs(pos[ix + 2]) > limit) pos[ix + 2] *= -0.5;
+  }
+
+  geometry.attributes.position.needsUpdate = true;
+
+  /* organism breathing */
+  points.rotation.y += 0.0008;
+  points.rotation.x = Math.sin(time * 0.2) * 0.1;
+
+  renderer.render(scene, camera);
+}
+animate();
+
+</script>
+
+</body>
+</html>

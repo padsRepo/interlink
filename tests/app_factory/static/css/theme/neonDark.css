@@ -1,0 +1,140 @@
+:root {
+  
+  /* =========================================================
+   *  1. SPACING SCALE
+   *  = *======================================================== */
+  
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  
+  /* =========================================================
+   *  2. RADIUS SCALE
+   *  = *======================================================== */
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 25px;
+  --radius-theme: 4% 8% 12% 6%;
+  
+  /* =========================================================
+   *  3. TYPOGRAPHY
+   *  = *======================================================== */
+  
+  --font-main: "Space Mono", monospace;
+  --font-secondary: "Daddytime Mono", monospace;
+  --font-heading: "Daddytime Mono", monospace;
+  --font-subheading: "Cinzel", serif;
+  --font-varient: small-caps;
+  
+  /* =========================================================
+   *  4. COLORS - BASE SURFACES
+   *  = *======================================================== */
+  
+  --bg-main: #05050a;
+  --bg-secondary: #0b0b14;
+  --bg-tertiary: #111122;
+  --bg-terminal: #000000;
+  --bg-nav: transparent;
+  
+  
+  /* =========================================================
+   *  5. COLORS - TEXT
+   *  = *======================================================== */
+  
+  --text-primary: #e6f1ff;
+  --text-secondary: #b8c6ff;
+  --text-muted: #6b7280;
+  --text-align: center;
+  
+  /* =========================================================
+   *  6. COLORS - BORDERS
+   *  = *======================================================== */
+  
+  --border-subtle: #1a1a2e;
+  --border-strong: #2a2a4a;
+  
+  
+  /* =========================================================
+   *  7. COLORS - ACCENTS (NEON CORE)
+   *  = *======================================================== */
+  
+  --accent-1: #00bfff;   /* cyan */
+  --accent-2: #8a2be2;   /* purple */
+  --accent-3: #ff1493;   /* pink */
+  --accent-4: #ffa500;   /* orange */
+  
+  
+  /* =========================================================
+   *  8. SEMANTIC COLORS
+   *  = *======================================================== */
+  
+  --success: #22c55e;
+  --error: #ff3b3b;
+  --warning: #ffcc00;
+  
+  
+  /* =========================================================
+   *  9. GRADIENTS (SIGNATURE WORMHOLE)
+   *  = *======================================================== */
+  
+  --gradient: linear-gradient(
+    135deg,
+    var(--accent-1),
+    var(--accent-2),
+    var(--accent-3),
+    var(--accent-4)
+  );
+  
+  --gradient-reverse: linear-gradient(
+    135deg,
+    var(--accent-4),
+    var(--accent-3),
+    var(--accent-2),
+    var(--accent-1)
+  );
+  
+  
+  /* =========================================================
+   *  10. EFFECTS (SHADOWS / GLOWS)
+   *  = *======================================================== */
+  
+  --text-shadow: 0 0 6px rgba(0, 191, 255, 0.4);
+  
+  --glow-soft: 
+  0 0 6px rgba(138, 43, 226, 0.4),
+  0 0 12px rgba(0, 191, 255, 0.25);
+  
+  --glow-strong: 
+  0 0 12px rgba(255, 20, 147, 0.7),
+  0 0 24px rgba(138, 43, 226, 0.6),
+  0 0 36px rgba(0, 191, 255, 0.4);
+  
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow: 0 6px 18px rgba(138, 43, 226, 0.35);
+  --shadow-dark: 0 8px 24px rgba(0, 0, 0, 0.8);
+  
+  
+  /* =========================================================
+   *  11. MOTION
+   *  = *======================================================== */
+  
+  --transition-fast: 0.25s ease;
+  --transition-slow: 0.8s ease;
+  
+  --animation-1: pulseGlow 2.5s infinite;
+  
+  
+  /* =========================================================
+   *  12. MISC
+   *  = *======================================================== */
+  
+  --scrollbar: var(--gradient);
+  --scrollbar-hover: var(--gradient-reverse);
+  
+}

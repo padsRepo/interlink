@@ -1,14 +1,12 @@
 '''
-Safe Haven is like the security team for the president. Always lurking
-in the shadows, ready to defend your best interest. Since these are
-decorators they're easy to use.
+Decorators for securing your web page.
 
-[Python Decorators](https://peps.python.org/pep-0318/, "Python Decorators")
-
-All you have to do is add the appropriate decorator to each page that
-you want to add the functionality to. Here's a simple index page, that I
-want really locked down.
-
+Functions:  
+    honeypot(f): Redirect `blacklist` ip to a fake login page  
+    backdoor(f): Give full access to ip on the `whitelist`  
+    login(f): Redirect user to secure login page  
+    
+Examples:  
     @viewsBP.route('/')
     @backdoor
     @honeypot
@@ -16,10 +14,6 @@ want really locked down.
     def index():
       return render_template('index.html')
 
-And there's nothing more to it then that. Safe Haven checks that the
-person connecting passes, and if not redirects them to the appropriate
-page. If you're using templeton's Blueprints it will redirect to its
-login screen, and everything works seamlessly.
 '''
 
 import os
@@ -39,13 +33,14 @@ def honeypot(f):
   '''
   @wraps(f)
   def decorated_function(*args, **kwargs):
-    if session == {}:
-      ip = request.remote_addr
-      for b in blacklist:
-        if ip in blacklist:
+    ip = request.remote_addr
+    for b in blacklist:
+      if ip in blacklist:
+        if 'ip' not in session:
+          session['ip']
           print(" *", str(d.now()) + ' -->', "This IP is blacklisted:", ip)
           print(" *", str(d.now()) + ' -->', "This IP is blacklisted:", ip, file=open(os.environ.get('LOG_DIR') + '/pads.log', 'a'))
-          return redirect(url_for('templeton.loginRequired'))
+        return redirect(url_for('templeton.loginRequired'))
     return f(*args, **kwargs)
   return decorated_function
     
@@ -61,7 +56,7 @@ def backdoor(f):
       ip = request.remote_addr
       for w in whitelist:
         if ip in whitelist:
-          session['yourballslooklikemine'] = ip
+          session['whitelist'] = ip
     return f(*args, **kwargs)
   return decorated_function
 

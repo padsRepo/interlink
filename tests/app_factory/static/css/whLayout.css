@@ -1,0 +1,186 @@
+@import "core/framework.css";
+@import "core/animations.css";
+@import "core/scrollbar.css";
+@import "core/base.css";
+
+/* =========================
+ *  NAVIGATIONS
+ *  ========================= */
+
+.mainNav{
+  width: 97%;
+  padding: 0 0%;
+  background: var(--bg-nav);
+  top: 1%;
+  position: fixed;
+  display: block;
+  z-index: 1;
+}
+.mainNavDropdown{
+  width: 3.5%; 
+  cursor: pointer; 
+  display: inline-block;
+  
+}
+.mainNavDropdownContent{display: none;}
+.mainNavDropdown:hover .mainNavDropdownContent{display: block;}
+.mainNavDropdownContent ul{
+  display: block; 
+  width: 25%; 
+  padding: 0; 
+  margin: 0;
+  
+}
+.mainNavMenuIcon{
+  display: block; 
+  width: 100%; 
+  border-radius: var(--radius-xl); 
+  background: var(--bg-nav);
+  
+}
+.mainNavDropdownContent li, .mainNav .mainNavDropdownContent li a{
+  padding: 20% 0; 
+  color: var(--text-primary);
+  
+}
+.mainNavDropdownContent li a img{
+  width: 35%; 
+  background: var(--bg-nav);
+  
+}
+.mainNavDropdownContent ul li a{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 150px;
+  transition: 0.25s;
+}
+.mainNavDropdownContent ul li a:hover{
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  border-radius: var(--radius-xl);
+  box-shadow: inset 0 0 5px var(--bg-secondary);
+}
+.mainNavDropdownContent ul li a:active{color: var(--error); transition: 0s;}
+
+/* =========================
+ *  CONTAINERS
+ *  ========================= */
+
+.container {
+  background: var(--bg-main);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.catalog {
+  text-align: center;
+  padding: 0 5%;
+}
+
+.title{
+  float: left;
+  clear: left;
+  margin: 0 2%;
+}
+
+/* =========================
+ *  CARDS
+ *  ========================= */
+
+.profileCard {
+  margin: var(--space-lg);
+  padding: var(--space-sm);
+  background: var(--bg-main);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+  text-align: center;
+  height: 750px;
+}
+
+.profileCard:hover {
+  box-shadow: var(--shadow-soft);
+  transform: scale(1.02);
+}
+
+.profileCard p {
+  height: 100px;
+}
+
+.profileCard img {
+  width: 50%;
+}
+
+.profileCard a img {
+  width: 10%;
+  margin: var(--space-sm);
+}
+
+.profileCard a img:hover {
+  background: var(--bg-main);
+  border-radius: var(--radius-xl);
+  animation: var(--animation-1);
+}
+
+/* =========================
+ *  POLAROIDS
+ *  ========================= */
+
+.polaroid,
+.polaroid2 {
+  border: 2px solid var(--bg-secondary);
+  width: 30%;
+  padding: var(--space-sm) var(--space-sm) var(--space-xl);
+  box-shadow: var(--shadow-soft);
+  float: right;
+  transition: var(--transition-slow);
+}
+
+.polaroid {
+  margin: var(--space-lg);
+  transform: skew(-5deg, -5deg);
+}
+
+.polaroid2 {
+  margin: var(--space-sm);
+  transform: skew(5deg, 5deg);
+}
+
+.polaroidBackground {
+  background: rgba(186,186,186,0.75);
+}
+
+.polaroidBackground img {
+  width: 100%;
+}
+
+/* =========================
+ *  TERMINAL
+ *  ========================= */
+
+.terminal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent-2);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  box-shadow: var(--glow-soft);
+}
+
+#cal{
+width: 250px;
+border-radius: 10px;
+}
+.month{
+  position: relative;
+  float: left;
+  width: 15px;
+  height: 10px;
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: grey;
+  transform: rotate(25deg);
+}
+

@@ -4,16 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "interlink"
-version = "1.2.1"
+dynamic = ["version"]
 description = "Flask Generator for Forms, Reports, URLs and templates."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-  { name = "Joe Corso", email = "joe.corso.email@gmail.com" }
+  { name = "Joe Corso", email = "pads.email.address@gmail.com" }
 ]
 maintainers = [
-  { name = "Joe Corso", email = "joe.corso.email@gmail.com" }
+  { name = "Joe Corso", email = "pads.email.address@gmail.com" }
 ]
 
 keywords = ["flask", "form-generator", "reporting", "template", "web", "forms"]
@@ -35,10 +35,13 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://your.project.homepage"  # Optional
-Repository = "https://github.com/padsRepo/interlink"  # Optional
+Repository = "https://github.com/yourusername/interlink"  # Optional
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.setuptools.dynamic]
+version = {attr = "interlink.__init__.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]

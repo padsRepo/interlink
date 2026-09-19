@@ -1,0 +1,180 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main gradient: blue to pink to orange -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="35%" style="stop-color:#7b2ff7;stop-opacity:1" />
+      <stop offset="65%" style="stop-color:#ff0080;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Intense outer glow (4 layers) -->
+    <filter id="neonGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <!-- Outer cyan glow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="20" result="blur1"/>
+      <feFlood flood-color="#00d4ff" flood-opacity="0.8"/>
+      <feComposite in2="blur1" operator="in" result="glow1"/>
+      
+      <!-- Mid purple glow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur2"/>
+      <feFlood flood-color="#7b2ff7" flood-opacity="0.9"/>
+      <feComposite in2="blur2" operator="in" result="glow2"/>
+      
+      <!-- Inner pink glow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur3"/>
+      <feFlood flood-color="#ff0080" flood-opacity="1"/>
+      <feComposite in2="blur3" operator="in" result="glow3"/>
+      
+      <!-- Brightest white core -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur4"/>
+      <feFlood flood-color="#ffffff" flood-opacity="1"/>
+      <feComposite in2="blur4" operator="in" result="glow4"/>
+      
+      <feMerge>
+        <feMergeNode in="glow1"/>
+        <feMergeNode in="glow2"/>
+        <feMergeNode in="glow3"/>
+        <feMergeNode in="glow4"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Sparkle glow -->
+    <filter id="sparkleGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#ffffff" flood-opacity="1"/>
+      <feComposite in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Dark background with gradient -->
+  <rect width="512" height="512" fill="#0a0510"/>
+  <radialGradient id="bgGlow" cx="50%" cy="50%">
+    <stop offset="0%" style="stop-color:#1a0a2e;stop-opacity:0.5" />
+    <stop offset="100%" style="stop-color:#0a0510;stop-opacity:1" />
+  </radialGradient>
+  <rect width="512" height="512" fill="url(#bgGlow)"/>
+  
+  <!-- Email/Mail Icon -->
+  <g filter="url(#neonGlow)">
+    <!-- Envelope body -->
+    <rect x="120" y="180" width="272" height="180" rx="12"
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <rect x="125" y="185" width="262" height="170" rx="10"
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          opacity="0.6"/>
+    
+    <!-- Envelope flap (top triangle) -->
+    <path d="M 120 180 L 256 280 L 392 180" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"/>
+    
+    <path d="M 125 183 L 256 278 L 387 183" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          opacity="0.6"/>
+    
+    <!-- Left fold line -->
+    <path d="M 120 360 L 256 280" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round"/>
+    
+    <path d="M 125 357 L 256 280" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round"
+          opacity="0.6"/>
+    
+    <!-- Right fold line -->
+    <path d="M 392 360 L 256 280" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="8" 
+          stroke-linecap="round"/>
+    
+    <path d="M 387 357 L 256 280" 
+          fill="none" 
+          stroke="url(#mainGradient)" 
+          stroke-width="3" 
+          stroke-linecap="round"
+          opacity="0.6"/>
+  </g>
+  
+  <!-- Four-pointed sparkles (LEFT SIDE - cyan/purple) -->
+  <g filter="url(#sparkleGlow)">
+    <path d="M 70 200 L 72 205 L 77 207 L 72 209 L 70 214 L 68 209 L 63 207 L 68 205 Z" 
+          fill="#00d4ff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 90 150 L 91 153 L 94 154 L 91 155 L 90 158 L 89 155 L 86 154 L 89 153 Z" 
+          fill="#00d4ff">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" begin="0.3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 55 280 L 56 282 L 58 283 L 56 284 L 55 286 L 54 284 L 52 283 L 54 282 Z" 
+          fill="#7b2ff7">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 80 350 L 81 351 L 82 352 L 81 353 L 80 354 L 79 353 L 78 352 L 79 351 Z" 
+          fill="#00d4ff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="1s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Four-pointed sparkles (RIGHT SIDE - orange/pink) -->
+  <g filter="url(#sparkleGlow)">
+    <path d="M 440 220 L 442 225 L 447 227 L 442 229 L 440 234 L 438 229 L 433 227 L 438 225 Z" 
+          fill="#ff6b35">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.3s" begin="0.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 420 290 L 421 293 L 424 294 L 421 295 L 420 298 L 419 295 L 416 294 L 419 293 Z" 
+          fill="#ff0080">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.9s" begin="0.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 455 350 L 456 352 L 458 353 L 456 354 L 455 356 L 454 354 L 452 353 L 454 352 Z" 
+          fill="#ff6b35">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.1s" begin="0.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 435 170 L 436 171 L 437 172 L 436 173 L 435 174 L 434 173 L 433 172 L 434 171 Z" 
+          fill="#ff0080">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.7s" begin="1.2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Small dot sparkles -->
+  <g filter="url(#sparkleGlow)">
+    <circle cx="65" cy="240" r="1.5" fill="#7b2ff7">
+      <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="95" cy="310" r="1" fill="#00d4ff">
+      <animate attributeName="opacity" values="0;1;0" dur="2.8s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="445" cy="255" r="1.5" fill="#ff6b35">
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="425" cy="200" r="1" fill="#ff0080">
+      <animate attributeName="opacity" values="0;1;0" dur="2.6s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

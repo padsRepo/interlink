@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Joe Corso">
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <meta name="keywords" content="{% block keywords %}{% endblock %}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme/default.css') }}?01">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/aiLayout.css') }}?01">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/img/logos/agLogo.png') }}">
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body class="row pc mobile">
+
+  <div class="page-banner">
+    <div class="page-banner-inner">
+      <!-- LEFT -->
+      <div class="page-banner-left">
+        <div class="page-banner-title">Dashboard</div>
+        <div class="page-banner-subtitle">
+          Overview of system activity and metrics
+        </div>
+        <div class="page-banner-divider"></div>
+        <div class="page-banner-meta">
+          Last sync: 2 minutes ago
+        </div>
+      </div>
+      <!-- RIGHT -->
+      <div class="page-banner-actions">
+        <button class="btn">Refresh</button>
+        <button class="btn btn-primary">New Project</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-page">
+    <div>
+      <!-- HERO HEADER -->
+      <div class="auth-hero">
+        <div class="auth-hero-content">
+          <div class="auth-hero-title">PADS SYSTEM</div>
+          <div class="auth-hero-subtitle">
+            Personal Assistant & Deployment Environment
+          </div>
+          <div class="auth-hero-status">
+            <div class="auth-status-dot"></div>
+            Secure Node Online
+          </div>
+          <div class="auth-hero-divider"></div>
+        </div>
+      </div>
+      <!-- LOGIN BOX -->
+      <div class="login-container">
+        Login Container
+        <!-- your existing login form -->
+      </div>
+    </div>
+  </div>
+  
+  <div class="system-header">
+    <!-- Left -->
+    <div class="header-left">
+      <div class="header-logo">
+        <span>PADS</span>
+      </div>
+    </div>
+    <!-- Center -->
+    <div class="header-nav">
+      <a href="#">Dashboard</a>
+      <a href="#">Projects</a>
+      <a href="#">Systems</a>
+      <a href="#">Docs</a>
+    </div>
+    <!-- Right -->
+    <div class="header-right">
+      <div class="header-status">
+        <div class="header-status-dot"></div>
+        System Online
+      </div>
+      <div class="header-avatar">
+        <img src="{{ url_for('static', filename='img/logos/ai-padslogo3.png') }}" />
+      </div>
+    </div>
+  </div>
+  
+<div class="nav">
+  <div class="nav-logo">Wormhole</div>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <div class="dropdown">
+      <a class="dropdown-toggle">Projects ▾</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">PADS</a>
+        <a class="dropdown-item" href="#">Interlink</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">New Project</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a class="dropdown-toggle">System ▾</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item">Settings</a>
+        <a class="dropdown-item">Logs</a>
+        <a class="dropdown-item">Users</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 40px">
+
+  <h2 class="subheading">Subheading</h2>
+  <h2 class="muted">Subheading</h2>
+
+  <h1>Button</h1>
+  <button class="btn">Default</button>
+  <button class="btn btn-primary">Launch</button>
+  <button class="btn btn-outline">Outline</button>
+
+  <h1>Cards</h1>
+  <div class="card" style="margin-top: 40px; max-width: 400px;">
+    <div class="card-header">System Status</div>
+    <div class="card-body">All services operational.</div>
+    <div class="card-footer">Updated just now</div>
+  </div>
+
+  <h1>Terminal</h1>
+  <div class="terminal" style="margin-top: 40px; max-width: 500px;">
+    <div class="terminal-header">
+      <div class="terminal-dot dot-red"></div>
+      <div class="terminal-dot dot-yellow"></div>
+      <div class="terminal-dot dot-green"></div>
+    </div>
+    <div class="terminal-body">
+      <div class="terminal-line">
+        <span class="prompt">$</span>
+        <span class="command">pads sys update</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <h1>Product Grid</h1>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-badge">HOT</div>
+      <div class="product-image">
+        <img src="{{ url_for('static', filename='img/icons/png/ai-catalog.png') }}" />
+      </div>
+      <div class="product-content">
+        <div class="product-title">Neon Core Module</div>
+        <div class="product-description">
+          High-performance system component for PADS integration.
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$49</div>
+          <div class="product-actions">
+            <button class="btn btn-primary">Buy</button>
+            <button class="btn">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-image">
+        <img src="{{ url_for('static', filename='img/icons/png/ai-catalog.png') }}" />
+      </div>
+      <div class="product-content">
+        <div class="product-title">Quantum Storage Drive</div>
+        <div class="product-description">
+          Ultra-fast storage for your home lab infrastructure.
+        </div>
+        <div class="product-footer">
+          <div class="product-price">$129</div>
+          <div class="product-actions">
+            <button class="btn btn-primary">Buy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1>Profile Card</h1>
+  <div class="profile-card">
+    <!-- Avatar -->
+    <div class="profile-avatar">
+      <img src="{{ url_for('static', filename='img/logos/ai-padslogo3.png') }}" />
+    </div>
+    <!-- Name / Role -->
+    <div class="profile-name">Frank Wilson</div>
+    <div class="profile-role">System Architect / PADS</div>
+    <!-- Status -->
+    <div class="profile-status">
+      <div class="status-dot"></div>
+      Online
+    </div>
+    <!-- Bio -->
+    <div class="profile-bio">
+      Building modular systems, automation pipelines, and self-hosted infrastructure environments.
+    </div>
+    <!-- Tags -->
+    <div class="profile-tags">
+      <div class="profile-tag">Linux</div>
+      <div class="profile-tag">Flask</div>
+      <div class="profile-tag">PADS</div>
+      <div class="profile-tag">Automation</div>
+    </div>
+    <!-- Stats -->
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <div class="profile-stat-value">42</div>
+        <div class="profile-stat-label">Projects</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-value">128</div>
+        <div class="profile-stat-label">Commits</div>
+      </div>
+      <div class="profile-stat">
+        <div class="profile-stat-value">7</div>
+        <div class="profile-stat-label">Systems</div>
+      </div>
+    </div>
+    <!-- Actions -->
+    <div class="profile-actions">
+      <button class="btn btn-primary">Follow</button>
+      <button class="btn">Message</button>
+    </div>
+    <!-- Social Icons -->
+    <div class="profile-social">
+      <div class="social-icon">󰈌</div>
+      <div class="social-icon"></div>
+      <div class="social-icon">󱃝</div>
+      <div class="social-icon">🌐</div>
+    </div>
+    <!-- Meta -->
+    <div class="profile-meta">
+      Last active: 2 minutes ago
+    </div>
+  </div>
+
+  <br>
+
+  <div class="polaroid-card">
+    <!-- Photo -->
+    <div class="polaroid-photo">
+      <img src="{{ url_for('static', filename='img/logos/ai-padslogo3.png') }}" />
+    </div>
+    <!-- Label Area -->
+    <div class="polaroid-label">
+      <div class="polaroid-name">Frank Wilson</div>
+      <div class="polaroid-role">System Architect / PADS</div>
+      <!-- Status -->
+      <div class="polaroid-status">
+        <div class="polaroid-dot"></div>
+        Online
+      </div>
+      <!-- Social -->
+      <div class="polaroid-social">
+        <div class="social-icon">🐙</div>
+        <div class="social-icon">🐦</div>
+        <div class="social-icon">💼</div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  
+  <div class="copyright-card">
+    <!-- Stamp -->
+    <div class="copyright-stamp">REGISTERED</div>
+    <!-- Header -->
+    <div class="copyright-header">
+      <div>Registry: PADS Identity System</div>
+      <div>Record Type: USER</div>
+    </div>
+    <!-- Identity -->
+    <div class="copyright-name">Frank Wilson</div>
+    <div class="copyright-id">ID: PADS-USER-00042</div>
+    <!-- Metadata -->
+    <div class="copyright-meta">
+      <div class="meta-item">
+        <div class="meta-label">Role</div>
+        <div class="meta-value">System Architect</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Status</div>
+        <div class="meta-value">Active</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Access Level</div>
+        <div class="meta-value">Admin</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Region</div>
+        <div class="meta-value">US-East</div>
+      </div>
+    </div>
+    <!-- Description -->
+    <div class="copyright-description">
+      This record represents an active system participant within the PADS infrastructure. All actions are logged and attributed to this identity.
+    </div>
+    <!-- Footer -->
+    <div class="copyright-footer">
+      <div>Verified: YES</div>
+      <div>Last Updated: 2026-04-15</div>
+    </div>
+  </div>
+  
+  <div class="copyright-page">
+    <div class="copyright-container">
+      <!-- Header -->
+      <div class="copyright-header">
+        <div class="copyright-title">Legal & Copyright Information</div>
+        <div class="copyright-subtitle">System registry and usage compliance documentation</div>
+      </div>
+      <!-- Stamp -->
+      <div class="copyright-stamp">OFFICIAL RECORD</div>
+      <!-- Notice -->
+      <div class="copyright-notice">
+        This system, including all modules, components, and assets, is protected under applicable copyright laws. 
+        Unauthorized reproduction, modification, or distribution is strictly prohibited.
+      </div>
+      <!-- Metadata -->
+      <div class="copyright-meta-grid">
+        <div class="meta-box">
+          <div class="meta-label">System</div>
+          <div class="meta-value">PADS Framework</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-label">Owner</div>
+          <div class="meta-value">Frank Wilson</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-label">Version</div>
+          <div class="meta-value">v2.0</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-label">Region</div>
+          <div class="meta-value">US-EAST</div>
+        </div>
+      </div>
+      <!-- Sections -->
+      <div class="copyright-section">
+        <div class="copyright-section-title">Usage Rights</div>
+        <div class="copyright-text">
+          This software may be used internally within authorized environments. Redistribution outside approved systems is prohibited.
+        </div>
+      </div>
+      <div class="copyright-section">
+        <div class="copyright-section-title">Data Handling</div>
+        <div class="copyright-text">
+          All logs, telemetry, and system outputs are considered protected operational data and are subject to audit and retention policies.
+        </div>
+      </div>
+      <div class="copyright-section">
+        <div class="copyright-section-title">Liability</div>
+        <div class="copyright-text">
+          The system is provided as-is without warranty. Operational risk remains with the deploying entity.
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="copyright-footer">
+        <div>Generated by PADS Documentation Engine</div>
+        <div>Last Updated: 2026-04-15</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-page">
+    <div class="login-container">
+      <div class="login-title">PADS AUTH</div>
+      <div class="login-subtitle">System Access Portal</div>
+      <form>
+        <div class="login-field">
+          <label>Username</label>
+          <input type="text" placeholder="Enter username">
+        </div>
+        <div class="login-field">
+          <label>Password</label>
+          <input type="password" placeholder="Enter password">
+        </div>
+        <button class="login-btn">Login</button>
+      </form>
+      <div class="login-links">
+        <a href="#">Forgot password</a>
+        <a href="#">Create account</a>
+      </div>
+      <div class="login-status">
+        <div class="status-dot"></div>
+        System Online
+      </div>
+    </div>
+  </div>
+  
+  <div class="layout">
+    <!-- Banner -->
+    <div class="page-banner">
+      <div class="page-banner-inner">
+        <div class="page-banner-left">
+          <div class="page-banner-title">Projects</div>
+          <div class="page-banner-subtitle">Manage your systems</div>
+        </div>
+        <div class="page-banner-actions">
+          <button class="btn btn-primary">New</button>
+        </div>
+      </div>
+    </div>
+    <nav class="sidebar col-4" style="height: 100%; position: relative;"><a>link</a><a>link</a><a>link</a><a>link</a><a>link</a></nav>
+    <div class="layout-content container col-6">
+      <!-- Breadcrumbs -->
+      <div class="breadcrumbs">
+        Home <span>/</span> Projects
+      </div>
+      <!-- Alert -->
+      <div class="alert alert-success">
+        Project created successfully.
+      </div>
+      <div class="alert alert-error">
+        Project created error.
+      </div>
+      <div class="alert alert-warning">
+        Project created warning.
+      </div>
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Loader</th>
+        </tr>
+        <tr>
+          <td>PADS</td>
+          <td>Active</td>
+          <td><div class="loader"></div></td>
+        </tr>
+
+      </table>
+    </div>
+    <form class="form-group">
+      <label class="form-label" name="formlabel">Form Label</label>
+      <input class="form-input" name="formlable">
+      <label class="form-label" name="radio">Radio Buttons</label>
+      <input class="form-select" type="radio" name="radio">
+      <label class="form-label" name="textarea">Text Area</label>
+      <textarea class="form-textarea" name="textarea"></textarea>
+    </form>
+<!--
+    <div class="modal">
+      <div class="modal-content">
+        Modal Content
+      </div>
+    </div>
+-->
+  </div>
+  
+  <div class="repo">
+    <!-- SIDEBAR -->
+    <div class="repo-sidebar">
+      <div class="repo-title">Wormhole UI</div>
+      <div class="repo-nav">
+        <a href="#">Overview</a>
+        <a href="#">Components</a>
+        <a href="#">Themes</a>
+        <a href="#">Layouts</a>
+        <a href="#">Examples</a>
+      </div>
+    </div>
+    <!-- CONTENT -->
+    <div class="repo-content">
+      <!-- HEADER -->
+      <div class="repo-header">
+        <div class="repo-header-title">Buttons</div>
+        <div class="repo-header-subtitle">
+          Interactive controls for user actions
+        </div>
+      </div>
+      <!-- SECTION -->
+      <div class="repo-section">
+        <div class="repo-section-title">Primary Button</div>
+        <div class="repo-preview">
+          <div class="repo-preview-title">Preview</div>
+          <button class="btn btn-primary">Click Me</button>
+        </div>
+        <div class="repo-code">
+          &lt;button class="btn btn-primary"&gt;Click Me&lt;/button&gt;
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="git-repo">
+    <!-- HEADER -->
+    <div class="git-header">
+      <div class="git-repo-name">wormhole-ui</div>
+      <div class="git-repo-meta">
+        Modular UI system for PADS • Updated 2 hours ago
+      </div>
+    </div>
+    <!-- BRANCH BAR -->
+    <div class="git-branch-bar">
+      <div class="git-branch">main</div>
+      <div class="git-actions">
+        <button class="btn">Clone</button>
+        <button class="btn btn-primary">New File</button>
+      </div>
+    </div>
+    <!-- FILE LIST -->
+    <div class="git-files">
+      <div class="git-file-row">
+        <div class="git-file-name">
+          <span class="git-file-icon">📁</span>
+          src/
+        </div>
+        <div class="git-file-meta">
+          <span>Initial structure</span>
+          <span>2h ago</span>
+        </div>
+      </div>
+      <div class="git-file-row">
+        <div class="git-file-name">
+          <span class="git-file-icon">📄</span>
+          README.md
+        </div>
+        <div class="git-file-meta">
+          <span>Added docs</span>
+          <span>1h ago</span>
+        </div>
+      </div>
+    </div>
+    <!-- CODE VIEW -->
+    <div class="git-code">
+      <div class="git-code-header">
+        <div>README.md</div>
+        <div>Raw • Copy</div>
+      </div>
+      <div class="git-code-body">
+        # Wormhole UI
+        A modular UI system...
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+  <footer>
+    <small class="col-6 col-s-12 col-m-12">
+      <div id="cal">
+        <div id="clock">Loading Clock...</div>
+        <div id="weekofyear"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+        <div class="month"></div>
+      </div><br>
+      <a href="{{ url_for('/.copyright') }}">Copyright</a> &copy; <a href="https://github.com/FrankWilson88" title="Github" target="_blank">Joe Corso</a><div id="copyright"></div>
+      <br>{{ version }}-{{ updated }} {{ ip }} <p id="screenSize"></p>
+      {% if session['yourballslooklikemine'] %}
+        <p>Welcome, Housemaster</p>
+      {% endif %}
+    </small>
+
+    <small class="col-6 col-s-12 col-m-12">
+      <ul>
+        Site Map:
+        {% for s in siteMap %}
+          <li><a href="{{ url_for('{}'.format(s[1])) }}">{{ s[1] }}</a></li>
+        {% endfor %}
+      </ul>
+    </small>
+  </footer>
+  
+  <script src="{{ url_for('static', filename='js/luxon.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/clock.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/screenSize.js') }}"></script>
+
+</body>
+</html>
